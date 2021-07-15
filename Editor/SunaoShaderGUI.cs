@@ -17,7 +17,6 @@ namespace SunaoShader {
 	public class GUI : ShaderGUI {
 
 		MaterialProperty MainTex;
-		MaterialProperty BackSideTex;
 		MaterialProperty Color;
 		MaterialProperty Alpha;
 		MaterialProperty Cutout;
@@ -96,13 +95,6 @@ namespace SunaoShader {
 		MaterialProperty EmissionLighting;
 		MaterialProperty IgnoreTexAlphaE;
 		MaterialProperty EmissionInTheDark;
-		MaterialProperty SparkleEnable;
-		MaterialProperty SparkleParameterMap;
-		MaterialProperty SparkleDensity;
-		MaterialProperty SparkleSmoothness;
-		MaterialProperty SparkleFineness;
-		MaterialProperty SparkleAngularBlink;
-		MaterialProperty SparkleTimeBlink;
 
 		MaterialProperty ParallaxEnable;
 		MaterialProperty ParallaxMap;
@@ -203,8 +195,6 @@ namespace SunaoShader {
 			bool Shader_Opaque      = mat.shader.name.Contains("Opaque"           );
 			bool Shader_Transparent = mat.shader.name.Contains("Transparent"      );
 			bool Shader_Cutout      = mat.shader.name.Contains("Cutout"           );
-			bool Shader_Sparkles    = mat.shader.name.Contains("Sparkles"         );
-			bool Shader_DoubleSided = mat.shader.name.Contains("Double Sided"     );
 			bool Shader_StencilOut  = mat.shader.name.Contains("[Stencil Outline]");
 			bool Shader_Stencil     = mat.shader.name.Contains("[Stencil]"        );
 			bool Shader_StencilRW   = mat.shader.name.Contains("Read"             );
@@ -245,7 +235,6 @@ namespace SunaoShader {
 
 
 			MainTex           = FindProperty("_MainTex"           , Prop , false);
-			BackSideTex       = FindProperty("_BackSideTex"       , Prop , false);
 			Color             = FindProperty("_Color"             , Prop , false);
 			Alpha             = FindProperty("_Alpha"             , Prop , false);
 			Cutout            = FindProperty("_Cutout"            , Prop , false);
@@ -326,13 +315,6 @@ namespace SunaoShader {
 			EmissionLighting  = FindProperty("_EmissionLighting"  , Prop , false);
 			IgnoreTexAlphaE   = FindProperty("_IgnoreTexAlphaE"   , Prop , false);
 			EmissionInTheDark = FindProperty("_EmissionInTheDark" , Prop , false);
-			SparkleEnable     = FindProperty("_SparkleEnable"     , Prop , false);
-			SparkleParameterMap=FindProperty("_SparkleParameterMap",Prop , false);
-			SparkleDensity    = FindProperty("_SparkleDensity"    , Prop , false);
-			SparkleSmoothness = FindProperty("_SparkleSmoothness" , Prop , false);
-			SparkleFineness   = FindProperty("_SparkleFineness"   , Prop , false);
-			SparkleAngularBlink=FindProperty("_SparkleAngularBlink",Prop , false);
-			SparkleTimeBlink  = FindProperty("_SparkleTimeBlink"  , Prop , false);
 
 			ParallaxEnable    = FindProperty("_ParallaxEnable"    , Prop , false);
 			ParallaxMap       = FindProperty("_ParallaxMap"       , Prop , false);
@@ -467,10 +449,6 @@ namespace SunaoShader {
 					GUILayout.Label("Main Color & Texture Maps", EditorStyles.boldLabel);
 
 					ME.TexturePropertySingleLine (new GUIContent("Main Texture") , MainTex , Color);
-					if (Shader_DoubleSided)
-					{
-						ME.TexturePropertySingleLine (new GUIContent("Back Side Texture") , BackSideTex , Color);
-					}
 					ME.TextureScaleOffsetProperty(MainTex);
 
 					if (Shader_Cutout     ) ME.ShaderProperty(Cutout , new GUIContent("Cutout"));
@@ -743,21 +721,6 @@ namespace SunaoShader {
 						ME.ShaderProperty(EmissionInTheDark , new GUIContent("Only in the Dark"));
 					} else {
 						mat.SetInt("_EmissionFO" , 0);
-					}
-
-					if (Shader_Sparkles) {
-						using (new EditorGUILayout.VerticalScope("box")) {
-							GUILayout.Label("Sparkles" , EditorStyles.boldLabel);
-							ME.ShaderProperty(SparkleEnable , new GUIContent("Enable Sparkles"));
-							if (SparkleEnable.floatValue >= 0.5f) {
-								ME.TexturePropertySingleLine(new GUIContent("Sparkle Parameter Map") , SparkleParameterMap);
-								ME.ShaderProperty(SparkleDensity      , new GUIContent("Sparkle Density"      ));
-								ME.ShaderProperty(SparkleSmoothness   , new GUIContent("Sparkle Smoothness"   ));
-								ME.ShaderProperty(SparkleFineness     , new GUIContent("Sparkle Fineness"     ));
-								ME.ShaderProperty(SparkleAngularBlink , new GUIContent("Sparkle Angular Blink"));
-								ME.ShaderProperty(SparkleTimeBlink    , new GUIContent("Sparkle Time Blink"   ));
-							}
-						}
 					}
 
 					EditorGUI.indentLevel --;

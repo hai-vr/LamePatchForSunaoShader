@@ -7,14 +7,12 @@
 	#include "UnityCG.cginc"
 	#include "AutoLight.cginc"
 	#include "Lighting.cginc"
-	#include "Simplex3D.cginc"
 	#include "SunaoShader_Function.cginc"
 
 //-------------------------------------変数宣言
 
 //----Main
 	UNITY_DECLARE_TEX2D(_MainTex);
-	UNITY_DECLARE_TEX2D(_BackSideTex);
 	uniform float4    _MainTex_ST;
 	uniform float4    _Color;
 	uniform float     _Cutout;
