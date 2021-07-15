@@ -9,14 +9,13 @@
 // see LICENSE or http://suna.ooo/agenasulab/ss/LICENSE
 //--------------------------------------------------------------
 
-Shader "Sunao Shader/Opaque Double Sided" {
+Shader "Sunao Shader/Opaque" {
 
 
 	Properties {
 
 		[NoScaleOffset]
 		_MainTex           ("Main Texture"              , 2D) = "white" {}
-		_BackSideTex       ("Back Side Texture"         , 2D) = "white" {}
 		_Color             ("Color"                     , Color) = (1,1,1,1)
 		_Alpha             ("Alpha"                     , Range( 0.0,  2.0)) = 1.0
 		_Cutout            ("Cutout"                    , Range( 0.0,  1.0)) = 0.5
@@ -139,15 +138,6 @@ Shader "Sunao Shader/Opaque Double Sided" {
 		[SToggle]
 		_IgnoreTexAlphaE   ("Ignore Texture Alpha"      , int) = 0
 		_EmissionInTheDark ("Only in the Dark"          , Range(  0.0,  1.0)) = 0.0
-
-		[SToggle]
-		_SparkleEnable     ("Enable Sparkle"            , int) = 0
-		_SparkleParameterMap("Sparkle Parameter Map"    , 2D) = "white" {}
-		_SparkleDensity    ("Sparkle Density"           , Range(  0.0,  1.0)) = 0.6
-		_SparkleSmoothness ("Sparkle Smoothness"        , Range(  0.0,  1.0)) = 0.1
-		_SparkleFineness   ("Sparkle Fineness"          , Range(  0.0,  1.0)) = 0.5
-		_SparkleAngularBlink("Sparkle Angular Blink"    , Range(  0.0, 10.0)) = 2.0
-		_SparkleTimeBlink  ("Sparkle Time Blink"        , Range(  0.0, 10.0)) = 0.0
 
 
 		[SToggle]
@@ -317,7 +307,6 @@ Shader "Sunao Shader/Opaque Double Sided" {
 			#pragma target 4.5
 
 			#define PASS_FB
-			#define DOUBLE_SIDED
 
 			#include "./cginc/SunaoShader_Core.cginc"
 
@@ -341,7 +330,6 @@ Shader "Sunao Shader/Opaque Double Sided" {
 			#pragma target 4.5
 
 			#define PASS_OL_FB
-			#define DOUBLE_SIDED
 
 			#include "./cginc/SunaoShader_OL.cginc"
 
@@ -367,7 +355,6 @@ Shader "Sunao Shader/Opaque Double Sided" {
 			#pragma target 4.5
 
 			#define PASS_OL_FA
-			#define DOUBLE_SIDED
 
 			#include "./cginc/SunaoShader_OL.cginc"
 
@@ -394,7 +381,6 @@ Shader "Sunao Shader/Opaque Double Sided" {
 			#pragma target 4.5
 
 			#define PASS_FA
-			#define DOUBLE_SIDED
 
 			#include "./cginc/SunaoShader_Core.cginc"
 
@@ -417,7 +403,6 @@ Shader "Sunao Shader/Opaque Double Sided" {
 			#pragma target 4.5
 
 			#define PASS_SC
-			#define DOUBLE_SIDED
 
 			#include "./cginc/SunaoShader_SC.cginc"
 
