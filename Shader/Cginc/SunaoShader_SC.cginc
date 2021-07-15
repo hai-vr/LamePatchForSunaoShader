@@ -7,7 +7,6 @@
 //-------------------------------------Include
 
 	#include "UnityCG.cginc"
-	#include "Simplex3D.cginc"
 	#include "SunaoShader_Function.cginc"
 
 //-------------------------------------変数宣言
@@ -96,6 +95,6 @@ float4 frag (VOUT IN) : COLOR {
 	#endif
 
 	SHADOW_CASTER_FRAGMENT(IN)
-
+	
 	return OUT;
 }
