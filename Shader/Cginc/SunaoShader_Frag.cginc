@@ -261,7 +261,7 @@ float4 frag (FRAG_ARGS) : COLOR {
 		#ifdef SPARKLES
 			if (_SparkleEnable) {
 				float4 p = tex2D(_SparkleParameterMap, IN.euv.xy);
-				float SparkleValue = Sparkles(IN.view, float3(IN.euv.xy, 1.0f),
+				float SparkleValue = Sparkles(View, float3(IN.euv.xy, 1.0f),
 				                              _SparkleDensity * p.r, _SparkleSmoothness * p.g, _SparkleFineness * p.b,
 				                              _SparkleAngularBlink, _SparkleTimeBlink);
 				Emission *= saturate(SparkleValue);
