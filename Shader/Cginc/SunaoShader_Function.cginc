@@ -158,3 +158,40 @@ float  RimLightCalc(float3 normal , float3 view , float power , float gradient) 
 
 	return orim;
 }
+
+//-------------------------------------ラメの計算
+// 出典: https://github.com/LasseWestmark/Sparkle-Shader-Unity
+// Modified by Chigiri Tsutsumi
+//
+// MIT License
+//
+// Copyright (c) 2017 LasseWestmark
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+float Sparkles(float3 view, float3 pos, float density, float smoothness, float fineness, float rotationSensitivity, float blinkFrequency) {
+	smoothness *= 0.5f;
+	fineness *= 1000.0f;
+	pos *= fineness;
+	float thr = 1.0f - density;
+	float t = _Time.y * blinkFrequency;
+	float sparkles = snoise(pos + view * rotationSensitivity - t) * snoise(pos + t);
+	sparkles = smoothstep(thr-smoothness, thr+smoothness, sparkles);
+
+	return sparkles;
+}

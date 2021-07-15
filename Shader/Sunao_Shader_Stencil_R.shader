@@ -16,6 +16,7 @@ Shader "Sunao Shader/[Stencil]/Read" {
 
 		[NoScaleOffset]
 		_MainTex           ("Main Texture"              , 2D) = "white" {}
+		_BackSideTex       ("Back Side Texture"         , 2D) = "white" {}
 		_Color             ("Color"                     , Color) = (1,1,1,1)
 		_Alpha             ("Alpha"                     , Range( 0.0,  2.0)) = 1.0
 		_Cutout            ("Cutout"                    , Range( 0.0,  1.0)) = 0.5
