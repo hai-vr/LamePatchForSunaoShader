@@ -9,13 +9,14 @@
 // see LICENSE or http://suna.ooo/agenasulab/ss/LICENSE
 //--------------------------------------------------------------
 
-Shader "Sunao Shader/Transparent" {
+Shader "Sunao Shader/Transparent Sparkles" {
 
 
 	Properties {
 
 		[NoScaleOffset]
 		_MainTex           ("Main Texture"              , 2D) = "white" {}
+		_BackSideTex       ("Back Side Texture"         , 2D) = "white" {}
 		_Color             ("Color"                     , Color) = (1,1,1,1)
 		_Alpha             ("Alpha"                     , Range( 0.0,  2.0)) = 1.0
 		_Cutout            ("Cutout"                    , Range( 0.0,  1.0)) = 0.5
@@ -138,6 +139,15 @@ Shader "Sunao Shader/Transparent" {
 		[SToggle]
 		_IgnoreTexAlphaE   ("Ignore Texture Alpha"      , int) = 0
 		_EmissionInTheDark ("Only in the Dark"          , Range(  0.0,  1.0)) = 0.0
+
+		[SToggle]
+		_SparkleEnable     ("Enable Sparkle"            , int) = 0
+		_SparkleParameterMap("Sparkle Parameter Map"    , 2D) = "white" {}
+		_SparkleDensity    ("Sparkle Density"           , Range(  0.0,  1.0)) = 0.6
+		_SparkleSmoothness ("Sparkle Smoothness"        , Range(  0.0,  1.0)) = 0.1
+		_SparkleFineness   ("Sparkle Fineness"          , Range(  0.0,  1.0)) = 0.5
+		_SparkleAngularBlink("Sparkle Angular Blink"    , Range(  0.0, 10.0)) = 2.0
+		_SparkleTimeBlink  ("Sparkle Time Blink"        , Range(  0.0, 10.0)) = 0.0
 
 
 		[SToggle]
@@ -308,6 +318,7 @@ Shader "Sunao Shader/Transparent" {
 
 			#define PASS_FB
 			#define TRANSPARENT
+			#define SPARKLES
 
 			#include "./cginc/SunaoShader_Core.cginc"
 
@@ -333,6 +344,7 @@ Shader "Sunao Shader/Transparent" {
 
 			#define PASS_OL_FB
 			#define TRANSPARENT
+			#define SPARKLES
 
 			#include "./cginc/SunaoShader_OL.cginc"
 
@@ -359,6 +371,7 @@ Shader "Sunao Shader/Transparent" {
 
 			#define PASS_FA
 			#define TRANSPARENT
+			#define SPARKLES
 
 			#include "./cginc/SunaoShader_Core.cginc"
 
@@ -385,6 +398,7 @@ Shader "Sunao Shader/Transparent" {
 
 			#define PASS_OL_FA
 			#define TRANSPARENT
+			#define SPARKLES
 
 			#include "./cginc/SunaoShader_OL.cginc"
 
